@@ -35,13 +35,17 @@ npm run watch
 ```
 
 ### run server
+```
 composer create-project symfony/skeleton movieBlog-server
 cd movieBlog-server
 php -S 127.0.0.1:8000 -t public
+```
 
 
 ### run client
+```
 npm install -g @vue/cli
 vue create movieBlog-client
 cd movieBlog-client
 npm serve
+```
