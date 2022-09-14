@@ -55,28 +55,28 @@ class MovieRepository extends ServiceEntityRepository
         return $query->getOneOrNullResult();
     }
 
-    //    /**
-    //     * @return Movie[] Returns an array of Movie objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('m.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    // for MoviesAPI
+    public function transform(Movie $movie)
+    {
+        return [
+            'id'    => (int) $movie->getId(),
+            'title' => (string) $movie->getTitle(),
+            'releaseYear' => (int) $movie->getReleaseYear(),
+            'description' => (string) $movie->getDescription(),
+            'imagePath' => (string) $movie->getImagePath(),
+            'actors' => (array) $movie->getActors(),
+        ];
+    }
 
-    //    public function findOneBySomeField($value): ?Movie
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function transformAll()
+    {
+        $movies = $this->findAll();
+        $moviesArray = [];
+
+        foreach ($movies as $movie) {
+            $moviesArray[] = $this->transform($movie);
+        }
+
+        return $moviesArray;
+    }
 }
