@@ -1,0 +1,53 @@
+{% extends "./base.html.twig" %}
+
+{% block body %}
+	<div class="sm:w-3/5 w-4/5 mx-auto">
+		{% if movie %}
+
+			<h1 class="pt-20 sm:text-5xl md:text-7xl text-4xl font-bold text-center">
+				{{ movie.title }}
+			</h1>
+
+			<div class="py-10 text-center">
+				<div class="inline-block sm:pt-1">
+					<h2 class="font-bold">
+						Created by: Code With Dary
+					</h2>
+
+					<p class="text-sm text-gray-600">
+						28-01-2022 4 min. read
+					</p>
+				</div>
+			</div>
+
+			<img src="{{ movie.imagePath }}" class="rounded-xl w-full shadow-xl" alt="Icon of Code With Dary"/>
+
+			<p class="text-xl py-6">
+				{{ movie.description }}
+			</p>
+
+			<a class="bg-green-500 font-bold py-2 px-4 rounded transition-all hover:bg-green-300" href="/movies/edit/{{movie.id}}">
+				Edit movie
+			</a>
+
+			<a class="bg-red-500 font-bold py-2 px-4 ml-5 rounded transition-all hover:bg-red-300" href="/movies/delete/{{movie.id}}">
+				Delete movie
+			</a>
+
+			<div class="mt-10 flex flex-row">
+				<div class="basis-1/2">
+					{% for a in movie.actors %}
+						<div class="">
+							<br>
+							<span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
+								{{ a.name }}
+							</span>
+						</div>
+					{% endfor %}
+				</div>
+				<!-- ... -->
+
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}
